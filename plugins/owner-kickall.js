@@ -1,12 +1,12 @@
 /* 
 
-- Kickall By Angel-OFC  
+- Kickall By BajoBots  
 
 - elimina todos de un grupo con un comando 
 
 - https://whatsapp.com/channel/0029VaJxgcB0bIdvuOwKTM2Y
 
-- Mejorado Por Angel waza🗿🍷
+- Mejorado Por Bajo waza🗿🍷
 
 */
 
@@ -38,13 +38,13 @@ m.react('💫')
 
     }
 
-    conn.reply(m.chat, '*⚔️ Eliminación Exitosa.*', m, );
+    conn.reply(m.chat, '*⚔️ Eliminación Exitosa DIOS BAJOBOTS.*', m, );
 
 m.react('✅')
 
 }
 
-handler.help = ['kickall']
+handler.help = ['kickall' 'vaciar']
 
 handler.tags = ['grupo'];
 
