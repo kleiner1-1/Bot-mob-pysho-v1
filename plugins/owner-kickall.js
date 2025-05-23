@@ -48,7 +48,8 @@ handler.help = ['kickall' 'vaciar']
 
 handler.tags = ['grupo'];
 
-handler.command = /^(kickall)$/i;
+handler.command = /^(kickall)$/i;  /^(vaciar)$/i;
+
 
 handler.group = true;
 
