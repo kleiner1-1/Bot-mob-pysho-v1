@@ -1,0 +1,99 @@
+import fetch from 'node-fetch';
+
+// Variables globales para almacenar el estado
+let sessions = new Map();
+
+const handler = async (m, { conn, command, args, text, usedPrefix }) => {
+    // Obtener o crear sesión para este chat
+    let session = sessions.get(m.chat) || {
+        videos: [],
+        currentIndex: 0
+    };
+    
+    // Comandos de navegación
+    if (command === 'tknext') {
+        if (!session.videos.length) {
+            return conn.reply(m.chat, '❌ Primero usa .tkscroll para buscar videos', m);
+        }
+        
+        if (session.currentIndex < session.videos.length - 1) {
+            session.currentIndex++;
+            return await sendVideo(session, m, conn);
+        } else {
+            return conn.reply(m.chat, '❌ Ya estás en el último video', m);
+        }
+    }
+    
+    if (command === 'tkprev') {
+        if (!session.videos.length) {
+            return conn.reply(m.chat, '❌ Primero usa .tkscroll para buscar videos', m);
+        }
+        
+        if (session.currentIndex > 0) {
+            session.currentIndex--;
+            return await sendVideo(session, m, conn);
+        } else {
+            return conn.reply(m.chat, '❌ Ya estás en el primer video', m);
+        }
+    }
+    
+    // Comando principal de búsqueda
+    if (command === 'tkscroll') {
+        if (!text) {
+            return conn.reply(m.chat, `❌ Escribe lo que quieres buscar\nEjemplo: ${usedPrefix}tkscroll bailes`, m);
+        }
+        
+        try {
+            const response = await fetch(`https://api.siputzx.my.id/api/s/tiktok?query=${encodeURIComponent(text)}`);
+            const data = await response.json();
+            
+            if (!data.status || !data.data?.length) {
+                return conn.reply(m.chat, '❌ No se encontraron videos', m);
+            }
+            
+            // Guardar los resultados en la sesión
+            session.videos = data.data;
+            session.currentIndex = 0;
+            sessions.set(m.chat, session);
+            
+            // Enviar el primer video
+            return await sendVideo(session, m, conn);
+        } catch (error) {
+            console.error(error);
+            return conn.reply(m.chat, '❌ Error al buscar videos', m);
+        }
+    }
+};
+
+async function sendVideo(session, m, conn) {
+    const video = session.videos[session.currentIndex];
+    
+    const caption = `
+🎥 *Video ${session.currentIndex + 1} de ${session.videos.length}*
+━━━━━━━━━━━━━━━━
+Usa estos comandos para navegar:
+.tknext - Siguiente video
+.tkprev - Video anterior
+    `.trim();
+    
+    try {
+        await conn.sendMessage(m.chat, { 
+            video: { url: video.play },
+            caption: caption,
+            gifPlayback: false
+        }, { quoted: m });
+    } catch (error) {
+        console.error(error);
+        conn.reply(m.chat, '❌ Error al enviar el video', m);
+    }
+}
+
+handler.help = [
+    'tkscroll <búsqueda>',
+    'tknext',
+    'tkprev'
+];
+handler.tags = ['downloader'];
+handler.command = /^(tkscroll|tknext|tkprev)$/i;
+
+export default handler;
