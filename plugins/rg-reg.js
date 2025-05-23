@@ -3,7 +3,7 @@ import { createHash } from 'crypto';
 
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
     let user = global.db.data.users[m.sender];
-    let channelID = '120363419009027760@newsletter'; // ID del canal donde se enviará la notificación
+    let channelID = '120363420303019043@newsletter'; // ID del canal donde se enviará la notificación
     let regFormat = /\|?(.*)([.|] *?)([0-9]*)$/i;
 
     // Validar si el usuario ya está registrado
