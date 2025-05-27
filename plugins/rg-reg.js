@@ -41,7 +41,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
             externalAdReply: {
                 title: '✅ Registro completado',
                 body: 'Gracias por registrarte.',
-                thumbnailUrl: 'https://files.catbox.moe/3mia0l.jpg', // Imagen proporcionada
+                thumbnailUrl: 'https://qu.ax/FVkVH.jpg', // Imagen proporcionada
                 sourceUrl: 'https://your-website.com', // Personaliza con tu enlace
                 mediaType: 1,
                 renderLargerThumbnail: true
@@ -57,7 +57,7 @@ let handler = async (m, { conn, text, args, usedPrefix, command }) => {
             externalAdReply: {
                 title: '🔔 Nuevo registro',
                 body: `Usuario ${name} ha sido registrado con éxito.`,
-                thumbnailUrl: 'https://files.catbox.moe/3mia0l.jpg', // Imagen proporcionada
+                thumbnailUrl: 'https://qu.ax/FVkVH.jpg', // Imagen proporcionada
                 sourceUrl: 'https://your-website.com', // Personaliza con tu enlace
                 mediaType: 1,
                 renderLargerThumbnail: true
