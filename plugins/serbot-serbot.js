@@ -223,7 +223,7 @@ try {
         },
         msgRetry: msgRetry,
         msgRetryCache: cache,
-        version: [2, 3000, 1015901307],
+        version: [2, 3000, 1023223821],
         syncFullHistory: true,
         browser: isCode ? ["Ubuntu", "Chrome", "110.0.5585.95"] : ["Crow", "Chrome", "2.0.0"],
         defaultQueryTimeoutMs: undefined,
