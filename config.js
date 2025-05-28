@@ -11,6 +11,7 @@ import axios from 'axios'
 global.owner = [
   ['573162402768', 'Bajobots OFC',true],
   ['573216372270', 'blots',true],
+  ['59169739411'],
   ['584123989549', 'sisked',true],
   ['50557865603', 'Willzek',true],
   ['5212431268546', 'Emma (Violets Version)',true],
