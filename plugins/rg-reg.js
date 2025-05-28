@@ -2,7 +2,7 @@ import { createHash } from 'crypto';
 
 let handler = async (m, { conn, text, args, usedPrefix, command }) => {
     let user = global.db.data.users[m.sender];
-    let channelID = '0029VbAWGXyAO7R9SugHPF3M';
+    let channelID = '120363420303019043@newsletter';
     let regFormat = /\|?(.*)([.|] *?)([0-9]*)$/i;
 
     if (user.registered) {
