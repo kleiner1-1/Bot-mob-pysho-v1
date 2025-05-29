@@ -186,6 +186,40 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
    }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
 
+    // Agregamos la indicación y los botones al menú
+    let menuText = textFinal.trim() + "\n\n🔹 Selecciona una opción:";
+
+    const buttons = [
+      {
+        buttonId: `${_p}owner`,
+        buttonText: { displayText: "👑 Ｃ Ｒ Ｅ Ａ Ｄ Ｏ Ｒ" },
+        type: 1,
+      },
+      {
+        buttonId: `${_p}code`,
+        buttonText: { displayText: "🕹 Ｓ Ｅ Ｒ Ｂ Ｏ Ｔ" },
+        type: 1,
+      },      {
+        buttonId: `${_p}grupos`,
+        buttonText: { displayText: "🌪 Ｇ Ｒ Ｕ Ｐ Ｏ Ｓ" },
+        type: 1,
+      },
+    ];
+
+    let img = 'https://qu.ax/FVkVH.jpg';
+    await m.react('💯');
+
+    await conn.sendMessage(
+      m.chat,
+      {
+        image: { url: img },
+        caption: menuText,
+        buttons: buttons,
+        footer: "WHATSAPP BOT X BAJO BOTS",
+        viewOnce: true,
+      },
+      { quoted: m }
+    
     let pp = 'https://i.ibb.co/CPVcnqH/file.jpg'
     let pp2 = 'https://i.ibb.co/9WrytGt/file.jpg'
     let pp3 = 'https://i.ibb.co/CPVcnqH/file.jpg'
