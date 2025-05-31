@@ -46,8 +46,8 @@ const sendSticker = (m, conn, stickerFile) => {
       isForwarded: false,
       externalAdReply: {
         showAdAttribution: false,
-        title: 'Barboza Bot 🤖',
-        body: 'tu papi barboza',
+        title: 'MobPysho Bot 🤖',
+        body: 'tu papi bajobots',
         mediaType: 2,
         sourceUrl: REDES,
         thumbnail: ICONS
