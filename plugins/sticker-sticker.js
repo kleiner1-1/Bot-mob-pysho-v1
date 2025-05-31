@@ -4,7 +4,7 @@ import { webp2png} from '../lib/webp2mp4.js';
 import uploadFile from '../lib/uploadFile.js';
 import uploadImage from '../lib/uploadImage.js';
 
-const REDES = 'https://www.instagram.com/sebastian_barboza13?igsh=ZGsyNm9lNTBhcGp1';
+const REDES = '';
 const ICONS = null;
 
 const handler = async (m, { conn}) => {
