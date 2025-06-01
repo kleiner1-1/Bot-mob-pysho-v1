@@ -17,8 +17,9 @@ let crm3 = "SBpbmZvLWRvbmFyLmpz"
 let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
-let rtx = `*PyshoBot* *QR*\nESCANEA ESTE CODIGO QR PARA SER SUB DE PYSHOBOT EXPIRA EN 60 SEGUNDOS`;
-let rtx2 = `*CÓDIGO PARA SER SUB BOT*\n\nCopia y pega este código en WhatsApp > Dispositivos vinculados > Vincular con número:`;
+let rtx = `CODIGO QR`;
+
+let rtx2 = `CODIGO DE 8 DIGITOS`;
 
 let imagenUrl = 'https://files.catbox.moe/sv8m42.jpg';
 
