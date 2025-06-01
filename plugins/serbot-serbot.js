@@ -1,4 +1,13 @@
-import('child_process')
+const { useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion} = (await import("@whiskeysockets/baileys"));
+import qrcode from "qrcode"
+import NodeCache from "node-cache"
+import fs from "fs"
+import path from "path"
+import pino from 'pino'
+import chalk from 'chalk'
+import util from 'util' 
+import * as ws from 'ws'
+const { child, spawn, exec } = await import('child_process')
 const { CONNECTING } = ws
 import { makeWASocket } from '../lib/simple.js'
 import { fileURLToPath } from 'url'
@@ -9,7 +18,6 @@ let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
 let rtx = `*PyshoBot* *QR*\nESCANEA ESTE CODIGO QR PARA SER SUB DE PYSHOBOT EXPIRA EN 60 SEGUNDOS`;
-
 let rtx2 = `*CÓDIGO PARA SER SUB BOT*\n\nCopia y pega este código en WhatsApp > Dispositivos vinculados > Vincular con número:`;
 
 let imagenUrl = 'https://files.catbox.moe/sv8m42.jpg';
@@ -38,13 +46,13 @@ if (!fs.existsSync(pathkiritoJadiBot)){
 fs.mkdirSync(pathkiritoJadiBot, { recursive: true })
 }
 kiritoJBOptions.pathkiritoJadiBot = pathkiritoJadiBot
-pyshoJBOptions.m = m
-pyshoJBOptions.conn = conn
-pyshoJBOptions.args = args
-pyshoJBOptions.usedPrefix = usedPrefix
-pyshoJBOptions.command = command
-pyshoJBOptions.fromCommand = true
-pyshoJadiBot(pyshoJBOptions)
+kiritoJBOptions.m = m
+kiritoJBOptions.conn = conn
+kiritoJBOptions.args = args
+kiritoJBOptions.usedPrefix = usedPrefix
+kiritoJBOptions.command = command
+kiritoJBOptions.fromCommand = true
+kiritoJadiBot(kiritoJBOptions)
 global.db.data.users[m.sender].Subs = new Date * 1
 } 
 handler.help = ['qr', 'code']
