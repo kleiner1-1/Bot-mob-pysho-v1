@@ -18,7 +18,6 @@ let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
 let rtx = `CODIGO QR`;
-
 let rtx2 = `CODIGO DE 8 DIGITOS`;
 
 let imagenUrl = 'https://files.catbox.moe/sv8m42.jpg';
