@@ -53,7 +53,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
   pyshobotJadiBot(pyshobotJBOptions)
   global.db.data.users[m.sender].Subs = new Date * 1
 }
- = ['serbot']
+handler.tag = ['serbot']
 handler.command = ['qr', 'code']
 export default handler
 
