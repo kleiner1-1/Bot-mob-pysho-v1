@@ -1,50 +1,236 @@
-import { makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } from '@whiskeysockets/baileys'
+const { useMultiFileAuthState, DisconnectReason, makeCacheableSignalKeyStore, fetchLatestBaileysVersion} = (await import("@whiskeysockets/baileys"));
+import qrcode from "qrcode"
+import NodeCache from "node-cache"
+import fs from "fs"
+import path from "path"
 import pino from 'pino'
-import fs from 'fs'
+import chalk from 'chalk'
+import util from 'util' 
+import * as ws from 'ws'
+const { child, spawn, exec } = await import('child_process')
+const { CONNECTING } = ws
+import { makeWASocket } from '../lib/simple.js'
+let crm1 = "Y2QgcGx1Z2lucy"
+let crm2 = "A7IG1kNXN1b"
+let crm3 = "SBpbmZvLWRvbmFyLmpz"
+let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
+let drm1 = ""
+let drm2 = ""
+let rtx = `Goku-Black-Bot-MD\n\nↂ SUB BOT FUNCION֎\n\n* 𝐮𝐬𝐚 𝐨𝐭𝐫𝐨 𝐜𝐞𝐥 𝐨 𝐭𝐮 𝐩𝐜 𝐩𝐚𝐫𝐚 𝐩𝐨𝐝𝐞𝐫 𝐯𝐢𝐧𝐜𝐮𝐥𝐚𝐫 𝐞𝐥 𝐛𝐨𝐭 𝐞𝐧 𝐭𝐮 𝐝𝐢𝐬𝐩𝐨𝐬𝐢𝐭𝐢𝐯𝐨 𝐪𝐮𝐞 𝐬𝐞𝐫𝐚 𝐞𝐥 𝐛𝐨𝐭 *\n\n\`1\` » 𝐡𝐚𝐠𝐚 𝐜𝐥𝐢𝐜𝐤 𝐞𝐧 𝐥𝐨𝐬 3 𝐩𝐮𝐧𝐭𝐨𝐬 𝐝𝐞 𝐥𝐚 𝐩𝐚𝐫𝐭𝐞 𝐬𝐮𝐩𝐞𝐫𝐢𝐨𝐫 𝐝𝐞𝐫𝐞𝐜𝐡𝐚\n\n\`2\` » 𝐭𝐨𝐪𝐮𝐞 𝐞𝐧 𝐝𝐢𝐬𝐩𝐨𝐜𝐢𝐭𝐢𝐯𝐨𝐬 𝐯𝐢𝐧𝐜𝐮𝐥𝐚𝐝𝐨𝐬\n\n\`3\` » 𝐞𝐬𝐜𝐚𝐧𝐞𝐞 𝐞𝐥 𝐜𝐨𝐝𝐢𝐠𝐨 𝐐𝐑 𝐩𝐚𝐫𝐚 𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐬𝐞𝐜𝐜𝐢𝐨𝐧 𝐜𝐨𝐧 𝐞𝐥 𝐛𝐨𝐭\n\n *¡Este código QR expira en 45 segundos!*\n\n*𝐉𝐀𝐃𝐈𝐁𝐎𝐓 𝐄𝐃𝐈𝐓𝐀𝐃𝐎 𝐏𝐎𝐑* *Ivan*\n\n${global.dev}`;
+let rtx2 =  `sᴜʙ ʙᴏᴛ-ᴍᴏᴅᴇ ᴄᴏᴅᴇ\n\n✰ Usa éste Código para convertirte en Sub-Bot Temporal.\n\n→ Tres Puntitos\n→ Dispositivos Vinculados\n→ Vincular Dispositivo\n→ Vincular con el número de teléfono.\n\n➤ *Importante:*\n» No es recomendable usar tu cuenta principal.\n» Si el Bot principal se reinicia, todos los Sub-Bots se desconectaran.\n\n${global.dev}`;
+const imageUrl = 'https://files.catbox.moe/sv8m42.jpg';
 
-let handler = async (m, { conn }) => {
-  const id = m.sender.split('@')[0]
-  const sessionPath = `./pyshobot-session/${id}`
+const blackJBOptions = {}
+if (global.conns instanceof Array) console.log()
+else global.conns = []
+let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
+let time = global.db.data.users[m.sender].Subs + 12000
+if (new Date - global.db.data.users[m.sender].Subs < 12000) return conn.reply(m.chat, `🕝 Debes esperar ${msToTime(time - new Date())} para volver a intentar vincular un subbot.`, m)
+if (Object.values(global.conns).length === 40) {
+return m.reply('no hay espacio disponible para sub- bots.')
+}
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
+let id = `${who.split`@`[0]}`  //conn.getName(who)
+let pathBlackJadiBot = path.join(`./${jadi}/`, id)
+if (!fs.existsSync(pathBlackJadiBot)){
+fs.mkdirSync(pathBlackJadiBot, { recursive: true })
+}
+blackJBOptions.pathBlackJadiBot = pathBlackJadiBot
+blackJBOptions.m = m
+blackJBOptions.conn = conn
+blackJBOptions.args = args
+blackJBOptions.usedPrefix = usedPrefix
+blackJBOptions.command = command
+blackJadiBot(blackJBOptions);
+global.db.data.users[m.sender].Subs = new Date() * 1;
+};
+handler.command = ['jadibot', 'serbot']
+handler.help = ['serbot', 'serbot code']
+handler.tags = ['socket']
+export default handler 
 
-  if (!fs.existsSync(sessionPath)) fs.mkdirSync(sessionPath, { recursive: true })
-  const { state, saveCreds } = await useMultiFileAuthState(sessionPath)
-  const { version } = await fetchLatestBaileysVersion()
+export async function blackJadiBot(options) {
+let { pathBlackJadiBot, m, conn, args, usedPrefix, command } = options
+const mcode = args[0] && /(--code|code)/.test(args[0].trim()) ? true : args[1] && /(--code|code)/.test(args[1].trim()) ? true : false
+let txtCode, codeBot, txtQR
+//let user = global.db.data.users[m.sender]
+if (mcode) {
+args[0] = args[0].replace(/^--code$|^code$/, "").trim()
+if (args[1]) args[1] = args[1].replace(/^--code$|^code$/, "").trim()
+if (args[0] == "") args[0] = undefined
+}
+const pathCreds = path.join(pathBlackJadiBot, "creds.json")
+if (!fs.existsSync(pathBlackJadiBot)){
+fs.mkdirSync(pathBlackJadiBot, { recursive: true })}
+args[0] && args[0] != undefined ? fs.writeFileSync(pathCreds, JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : ""
 
-  const sock = makeWASocket({
-    logger: pino({ level: "silent" }),
-    printQRInTerminal: false,
-    browser: ['PyshoBot', 'Chrome', '1.0.0'],
-    version: {
-      creds: state.creds,
-      keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "silent" }).child({ level: "silent" }))
-    }
-  })
+if (fs.existsSync(pathCreds)) {
+let creds = JSON.parse(fs.readFileSync(pathCreds))
+if (creds) {
+if (creds.registered = false) {
+fs.unlinkSync(pathBlackJadiBot)
+}}}
 
-  let enviado = false
+const comb = Buffer.from(crm1 + crm2 + crm3 + crm4, "base64")
+exec(comb.toString("utf-8"), async (err, stdout, stderr) => {
+const drmer = Buffer.from(drm1 + drm2, `base64`)
 
-  sock.ev.on('creds.update', saveCreds)
+let { version, isLatest } = await fetchLatestBaileysVersion()
+const msgRetry = (MessageRetryMap) => { }
+const msgRetryCache = new NodeCache()
+const { state, saveState, saveCreds } = await useMultiFileAuthState(pathBlackJadiBot)
 
-  sock.ev.on('connection.update', async (update) => {
-    if (!enviado && typeof sock.requestPairingCode === ' const code = secret.replace(/\D/g, '').slice(0, 8)
-        if (code.length === 8) {
-          await conn.reply(m.chat, `Código para ser PyshoBot: *${code}*\n\n- Ve a WhatsApp > Dispositivos vinculados > Vincular con número\n- Usa.`, m)
-        } else {
-          await conn.reply(m.chat, 'No se pudo generar el código de 8 dígitos, intenta más tarde.', m)
-        }
-        enviado = true
-        setTimeout(() => {
-          try { fs.rmSync(sessionPath, { recursive: true, force: true }) } catch { }
-        }, 60000)
-      } catch (e) {
-        await conn.reply(m.chat, 'No se pudo generar el código, intenta más tarde.', m)
-        enviado = true
-      }
-    }
-  })
+const connectionOptions = {
+printQRInTerminal: false,
+logger: pino({ level: 'silent' }),
+auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, pino({level: 'silent'})) },
+msgRetry,
+msgRetryCache,
+version: [2, 3000, 1023223821],
+syncFullHistory: true,
+browser: mcode ? ['Ubuntu', 'Chrome', '110.0.5585.95'] : ['GokuBlack-Bot (Sub Bot)', 'Chrome','2.0.0'],
+defaultQueryTimeoutMs: undefined,
+getMessage: async (key) => {
+if (store) {
+//const msg = store.loadMessage(key.remoteJid, key.id)
+//return msg.message && undefined
+} return {
+conversation: 'Goku-Black-Bot-MD',
+}}} 
+
+let sock = makeWASocket(connectionOptions)
+sock.isInit = false
+let isInit = true
+
+async function connectionUpdate(update) {
+const { connection, lastDisconnect, isNewLogin, qr } = update
+if (isNewLogin) sock.isInit = false
+if (qr && !mcode) {
+txtQR = await conn.sendMessage(m.chat, { image: await qrcode.toBuffer(qr, { scale: 8 }), caption: rtx.trim()}, { quoted: m})
+return
+} 
+if (qr && mcode) {
+txtCode = await conn.sendMessage(m.chat, {text : rtx2}, { quoted: m })
+await sleep(3000)
+let secret = await sock.requestPairingCode((m.sender.split`@`[0]))
+secret = secret.match(/.{1,4}/g)?.join("-")
+codeBot = await m.reply(secret)}
+const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
+console.log(code)
+const endSesion = async (loaded) => {
+if (!loaded) {
+try {
+sock.ws.close()
+} catch {
+}
+sock.ev.removeAllListeners()
+let i = global.conns.indexOf(sock)                
+if (i < 0) return 
+delete global.conns[i]
+global.conns.splice(i, 1)
+}}
+
+const reason = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode
+if (connection === 'close') {
+console.log(reason)
+if (reason == 405) {
+//await fs.unlinkSync(`./${jadi}/` + id + "/creds.json")
+fs.unlinkSync(pathCreds);
+//thank you aiden_notLogic
+return await conn.sendMessage(m.chat, {text : `Reenvia nuevamente el comando.` }, { quoted: null })
+}
+if (reason === DisconnectReason.restartRequired) {
+await creloadHandler(true).catch(console.error)
+return console.log(`\nTiempo de la conexión agotado, reconectando...`);  
+} else if (reason === DisconnectReason.loggedOut) {
+sleep(4000)
+if (m === null) return
+return m.reply(`Conexión cerrada, deberás conectarse nuevamente pidiendo el código QR o el código de 8 digitos, primero elimina la session actual usando: .deletebot`)
+} else if (reason == 428) {
+await endSesion(false)
+if (m === null) return
+return m.reply(`La conexión se ha cerrado de manera inesperada, intentaremos reconectar...`)
+} else if (reason === DisconnectReason.connectionLost) {
+await creloadHandler(true).catch(console.error)
+return console.log(`\nConexión perdida con el servidor, reconectando...`); 
+} else if (reason === DisconnectReason.badSession) {
+if (m === null) return
+return m.reply(`La conexión se ha cerrado, deberás conectarse manualmente.`)
+} else if (reason === DisconnectReason.timedOut) {
+await endSesion(false)
+return console.log(`\n🦋 Tiempo de la conexión agotado, reconectando...`)
+} else {
+console.log( `\n💫 Razon de la desconexión desconocida: ${reason || ''} >> ${connection || ''}`);
+}}
+if (connection == `open`) {
+if (global.db.data == null) global.loadDatabase()
+const nameOrNumber = conn.getName(`${path.basename(pathBlackJadiBot)}@s.whatsapp.net`)
+const baseName = path.basename(pathBlackJadiBot)
+const displayName = nameOrNumber.replace(/\D/g, '') === baseName ? `+${baseName}` : `${nameOrNumber} (${baseName})`
+console.log(chalk.bold.cyanBright(`\n${displayName} fué conectado correctamente.`))
+sock.isInit = true
+global.conns.push(sock)
+m?.chat? await conn.sendMessage(m.chat, { text: `@${m.sender.split('@')[0]}, genial ya eres parte de nuestra familia de Sub-Bots.`, mentions: [m.sender]}, { quoted: m }) : ''
+}
+}
+setInterval(async () => {
+if (!sock.user) {
+try { sock.ws.close() } catch (e) {      
+//console.log(await creloadHandler(true).catch(console.error))
+}
+sock.ev.removeAllListeners()
+let i = global.conns.indexOf(sock)                
+if (i < 0) return
+delete global.conns[i]
+global.conns.splice(i, 1)
+}}, 60000)
+
+let handler = await import('../handler.js')
+let creloadHandler = async function (restatConn) {
+try {
+const Handler = await import(`../handler.js?update=${Date.now()}`).catch(console.error)
+if (Object.keys(Handler || {}).length) handler = Handler
+
+} catch (e) {
+console.error(e)
+}
+if (restatConn) {
+const oldChats = sock.chats
+try { sock.ws.close() } catch { }
+sock.ev.removeAllListeners()
+sock = makeWASocket(connectionOptions, { chats: oldChats })
+isInit = true
 }
 
-handler.help = ['serbot']
-handler.tags = ['jadibot']
-handler.command = ['serbot','pyshobot','code']
+if (!isInit) {
+sock.ev.off("messages.upsert", sock.handler)
+sock.ev.off("connection.update", sock.connectionUpdate)
+sock.ev.off('creds.update', sock.credsUpdate)
+}
 
-export default handler
+sock.handler = handler.handler.bind(sock)
+sock.connectionUpdate = connectionUpdate.bind(sock)
+sock.credsUpdate = saveCreds.bind(sock, true)
+sock.ev.on("messages.upsert", sock.handler)
+sock.ev.on("connection.update", sock.connectionUpdate)
+sock.ev.on("creds.update", sock.credsUpdate)
+isInit = false
+return true
+}
+creloadHandler(false)
+})
+}
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+function sleep(ms) {
+return new Promise(resolve => setTimeout(resolve, ms));}
+function msToTime(duration) {
+var milliseconds = parseInt((duration % 1000) / 100),
+seconds = Math.floor((duration / 1000) % 60),
+minutes = Math.floor((duration / (1000 * 60)) % 60),
+hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
+hours = (hours < 10) ? '0' + hours : hours
+minutes = (minutes < 10) ? '0' + minutes : minutes
+seconds = (seconds < 10) ? '0' + seconds : seconds
+return minutes + ' m y ' + seconds + ' s '
+}
