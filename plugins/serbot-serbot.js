@@ -43,16 +43,18 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
   if (!fs.existsSync(pathPyshoBotJadiBot)) {
     fs.mkdirSync(pathPyshoBotJadiBot, { recursive: true })
   }
-  pyshobotJBOptions.pathPyshoBotJadiBot = pathPyshoBotJadiBot
-  pyshobotJBOptions.m = m
-  pyshobotJBOptions.conn = conn
-  pyshobotJBOptions.args = args
-  pyshobotJBOptions.usedPrefix = usedPrefix
-  pyshobotJBOptions.command = command
-  pyshobotJBOptions.fromCommand = true
-  pyshobotJadiBot(pyshobotJBOptions)
-  global.db.data.users[m.sender].Subs = new Date * 1
+pyshobotJBOptions.pathPyshoBotJadiBot =
+pathPyshoBotJadiBot
+pyshobotJBOptions.m =
+ pyshobotJBOptions.conn = conn
+pyshobotJBOptions.args = args
+pyshobotJBOptions.usedPrefix = usedPrefix
+pyshobotJBOptions.command = command
+pyshobotJBOptions.fromCommand = true
+pyshobotJadiBot(pyshobotJBOptions)
+global.db.data.users[m.sender].Subs = new Date * 1
 }
+handler.help = ['code']
 handler.tag = ['serbot']
 handler.command = ['qr', 'code']
 export default handler
