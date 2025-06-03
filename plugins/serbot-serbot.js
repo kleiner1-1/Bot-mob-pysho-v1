@@ -27,9 +27,9 @@ let crm3 = "Sinfo-Donar.js";
 let crm4 = " _autoresponder.js info-bot.js";
 let drm1 = "";
 let drm2 = "";
+let imagenUrl = 'https://files.catbox.moe/xduvnk.jpg';
 let rtx = "*Convertirse en sub bot / JadiBot*\n\n*🌼 Utilice otro celular para escanear este codigo QR o escanea el codigo mediante una PC para convertirte en Sub Bot*\n\n`1` » Haga clic en los tres puntos en la esquina superior derecha\n\n`2` » Toca dispositivos vinculados\n\n`3` » Escanee este codigo QR para iniciar sesión\n\n🌼 *Este código QR expira en 45 segundos*";
 let rtx2 = "*Convertirse en sub bot / JadiBot*\n\n*🌼 Usa este Código para convertirte en un Sub Bot*\n\n`1` » Haga clic en los tres puntos en la esquina superior derecha\n\n`2` » Toca dispositivos vinculados\n\n`3` » Selecciona Vincular con el número de teléfono\n\n`4` » Escriba el Código\n\n🌼 *Este código solo funciona en en el número que lo solicitó*";
-let imagenUrl = 'https://files.catbox.moe/xduvnk.jpg';
 
 // Inicialización de conexiones globales
 if (global.conns instanceof Array) {
