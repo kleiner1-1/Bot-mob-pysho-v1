@@ -1,4 +1,4 @@
-import fs from "fs"
+//import fs from "fs"
 import fetch from "node-fetch"
 import FormData from "form-data"
 
@@ -49,4 +49,4 @@ async function uploadUguu(path) {
     await fs.promises.unlink(path)
     throw "Upload failed"
   }
-}
+} //
