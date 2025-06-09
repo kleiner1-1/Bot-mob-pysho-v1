@@ -90,4 +90,4 @@ ESCRIBE LOS SIGUIENTES COMANDOS UNO POR UNO:
 
 
 
-## **Hello user, thank you for supporting this project. This won't last forever.**
+## **Hello este bot ya no resive actulizaciones.**
